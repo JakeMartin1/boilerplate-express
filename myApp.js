@@ -1,7 +1,9 @@
 let express = require('express');
 let app = express();
+require('dotenv').config() // loads environment variables
 
 console.log("Hello World-fromJake");
+console.log(process.env.MENU_API_KEY);
 
 //Syntax for routes in Express
 //app.METHOD(PATH, HANDLER) 
@@ -35,5 +37,31 @@ function (reg, res) {
 
 const pathToIndex = __dirname + "/views/index.html";
 app.get("/", (req, res) => res.sendFile(pathToIndex));
+
+//serve static assets with app.USE() & express.STATIC()
+//ex of static assests: css, stylesheets, imgs, etc
+const pathToAssets = __dirname + "/public"; //path on my server
+app.use("/public", express.static(pathToAssets)); //specifying ptahs for client requests
+
+app.get("/json", (req,res) => {
+  let message = 'hello json';
+  let name = 'jake';
+
+  if (process.env.MESSAGE_STYLE == "uppercase") {
+    message = message.toUpperCase();
+    name = name.toUpperCase();
+  }
+
+  const jsonObj = {
+    "message": message,
+    "name": name,
+    "age": 32
+  };
+  
+  res.json(jsonObj)
+});
+
+
+
 
 module.exports = app;
