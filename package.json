@@ -1,6 +1,9 @@
 {
   "name": "fcc-learn-node-with-express",
   "version": "0.1.0",
+  "description": "freecodecamp node/express intro",
+  "keywords": ["node", "epress", "freecodecamp"],
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
@@ -11,5 +14,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
-  }
+  },
+  "author": "Jake"
 }
