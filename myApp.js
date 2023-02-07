@@ -41,7 +41,7 @@ app.get("/", (req, res) => res.sendFile(pathToIndex));
 //serve static assets with app.USE() & express.STATIC()
 //ex of static assests: css, stylesheets, imgs, etc
 const pathToAssets = __dirname + "/public"; //path on my server
-app.use("/public", express.static(pathToAssets)); //specifying ptahs for client requests
+app.use("/public", express.static(pathToAssets)); //specifying paths for client requests
 
 app.get("/json", (req,res) => {
   let message = 'hello json';
@@ -60,8 +60,6 @@ app.get("/json", (req,res) => {
   
   res.json(jsonObj)
 });
-
-
 
 
 module.exports = app;
