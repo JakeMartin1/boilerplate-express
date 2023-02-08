@@ -45,21 +45,15 @@ const pathToContact = __dirname + "/views/contact.html";
 app.get("/contact", (req, res) => res.sendFile(pathToContact));
 
 app.get("/redorblue", (req, res) => {
-  // res.sendFile(__dirname + "/views/red.html");
-
-  let color;
-  console.log("color")
+  let rbcolor;
   
-  if (process.env.COLOR == "red") {
-    color = __dirname + "/views/red.html"
-    console.log("red worked")
+  if (process.env.VGCOLOR == "red") {
+    rbcolor = __dirname + "/views/red.html"
   } 
-  // else if (process.env.COLOR == "blue") {
-  //   color = __dirname + "/views/blue.html";
-  //   console.log("blue worked")
-  // }
-  res.sendFile(color)
-
+  else if (process.env.VGCOLOR == "blue") {
+    rbcolor = __dirname + "/views/blue.html";
+  } else {res.send("404 page not found")}
+  res.sendFile(rbcolor)
 });
 
 
