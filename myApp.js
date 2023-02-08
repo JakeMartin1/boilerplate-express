@@ -38,6 +38,31 @@ function (reg, res) {
 const pathToIndex = __dirname + "/views/index.html";
 app.get("/", (req, res) => res.sendFile(pathToIndex));
 
+const pathToAbout = __dirname + "/views/about.html";
+app.get("/about", (req, res) => res.sendFile(pathToAbout));
+
+const pathToContact = __dirname + "/views/contact.html";
+app.get("/contact", (req, res) => res.sendFile(pathToContact));
+
+app.get("/redorblue", (req, res) => {
+  // res.sendFile(__dirname + "/views/red.html");
+
+  let color;
+  console.log("color")
+  
+  if (process.env.COLOR == "red") {
+    color = __dirname + "/views/red.html"
+    console.log("red worked")
+  } 
+  // else if (process.env.COLOR == "blue") {
+  //   color = __dirname + "/views/blue.html";
+  //   console.log("blue worked")
+  // }
+  res.sendFile(color)
+
+});
+
+
 //serve static assets with app.USE() & express.STATIC()
 //ex of static assests: css, stylesheets, imgs, etc
 const pathToAssets = __dirname + "/public"; //path on my server
