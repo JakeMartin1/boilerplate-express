@@ -52,7 +52,11 @@ app.get("/redorblue", (req, res) => {
   } 
   else if (process.env.VGCOLOR == "blue") {
     rbcolor = __dirname + "/views/blue.html";
-  } else {res.send("404 page not found")}
+  } 
+  else {
+    res.send("404 page not found") 
+    return 
+  }
   res.sendFile(rbcolor)
 });
 
