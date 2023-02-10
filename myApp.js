@@ -97,6 +97,46 @@ app.get("/users/:username" , authMiddleware , (req,res) => {
   res.send(`Hello, ${username}!`);
 });
 
+//use a middleware function to find the current date and time 
+//when a get request is made to the route now 
+//and send the time as a json object in the response
+app.get( "/now", timeMidWare, (req,res) => {
+  res.json({time: req.time})
+  console.log(req.time);
+});
+
+//eget route parameter input
+//path ex: /user/:userID/book/:bookID -> user/codydf/book'3412
+//req.params: {userID: "codydf", bookID: "3412"}
+
+//handle GET 
+//request to the route /:word/echo
+//respond with a json object {echo: word}
+app.get( "/:word/echo", (req,res) => res.json({echo: req.params.word}));
+
+//handle GET
+//request through the route user/:userID/book/:bookID
+//send both params in the response as a json object
+app.get( '/user/:userID/book/:bookID' , (req,res) => {
+  res.json({
+    user: req.params.userID , 
+    book: req.params.bookID
+  });
+});
+
+//GET query parameter input
+//route: /name
+//actual url entered: /name?first=Cody&last=Feldhaus
+//? signifies when the query parameters start
+//& signifies an additional query parameter
+
+app.get("/name" , (req,res) => {
+  res.json({
+    name: `${req.query.first} ${req.query.middle.charAt(0)} ${req.query.last}`
+  })
+})
+
+
 //middleware snytax
 /* 
 req = request object ; res = response object ; next = the next
@@ -127,6 +167,11 @@ function authMiddleware(req,res,next) {
   } else {
     res.status(401).send("Unauthorized")
   };
+};
+
+function timeMidWare(req,res,next) {
+  req.time = new Date().toString();
+  next();
 };
 
 
